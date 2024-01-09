@@ -44,6 +44,20 @@ def create_purchase_order():
         'Items': []
     }
     purchase_orders.append(purchase_order)
-    
+
     return jsonify(purchase_order)
+
+
+@app.route('/purchase_orders/<int:id>/items')
+def get_purchase_orders_items(id):
+    for pedido in purchase_orders:
+        if pedido['id'] == id:
+            return jsonify(pedido['Items'])
+
+    return jsonify({'Message':'Pedido {}, não encontrado'.format(id)})
+
+
+
+
+
 app.run(port=5000)
